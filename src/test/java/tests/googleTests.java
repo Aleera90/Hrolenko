@@ -1,6 +1,7 @@
 package tests;
 
 
+import Pages.DetailPage;
 import Pages.SearchPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,6 +19,7 @@ public class googleTests {
     private static  SearchPage searchPage;
 
     private  static WebDriver driver;
+    private static DetailPage detailPage;
 
     @BeforeAll
     public static void init() {
@@ -26,6 +28,7 @@ public class googleTests {
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
         searchPage = new SearchPage(driver);
+        detailPage = new DetailPage(driver);
     }
 
     @Test
@@ -36,8 +39,16 @@ public class googleTests {
         //assertEquals(10,searchPage.results.size());
 
     }
+    @Test
+    public void test2(){
+        driver.get("http://google.com");
+        searchPage.search("selenium");
 
+       // assertEquals("Selenium",detailPage.getname());
+       // assertEquals("3.141.59 (14 ноября 2018 года)",detailPage.getLastVersion());
+       // assertEquals("Apache License 2.0",detailPage.getLicense());
 
+    }
 
     @AfterAll
     public static void teardown(){
