@@ -1,6 +1,7 @@
 package tests;
 
 
+import Pages.SearchPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class googleTests {
+    private static  SearchPage searchPage;
 
     private  static WebDriver driver;
 
@@ -23,16 +25,20 @@ public class googleTests {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
+        searchPage = new SearchPage(driver);
     }
 
     @Test
     public void test1() {
 
         driver.get("http://google.com");
-        driver.findElement(By.cssSelector("input.gLFyf.gsfi")).sendKeys("selenium", Keys.ENTER);
-        //assertEquals(10,driver.findElements(By.cssSelector("#search .g")).size());
+        searchPage.search("selenium");
+        //assertEquals(10,searchPage.results.size());
 
     }
+
+
+
     @AfterAll
     public static void teardown(){
         driver.quit();
